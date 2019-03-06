@@ -1,0 +1,48 @@
+#my_awk_program.awk - program for sorting grades
+
+
+# sorting function -  sorts in ascending order
+
+function sort(ARRAY, ELEMENTS,temp,i,j){
+
+	for(i=3; i<=ELEMENTS; ++i)
+		for(j=i; ARRAY[j-1]>ARRAY[j]; --j){
+			temp=ARRAY[j]
+			ARRAY[j]=ARRAY[j-1]
+			ARRAY[j-1]=temp
+		}
+
+	return
+}
+
+#main routine
+
+{
+if(NR==1)
+#print headers
+printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\n",$1, $2, "1", "2", "3", "4", "5")
+
+else
+{
+
+
+
+#loop through grades fields and assign values to grades array
+for(i=3; i<=NF; ++i)
+	grades[i-1]=$i
+		
+		
+	#call function
+	sort(grades,NF-1)
+
+	#print name
+	printf("%s\t%s\t",$1, $2)
+
+	#output loop
+	for(j=2; j<=NF-1;++j)
+		printf("%d\t", grades[j])
+		print( "\n")
+}
+}
+	
+	
